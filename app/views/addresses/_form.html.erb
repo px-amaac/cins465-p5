@@ -31,6 +31,11 @@
     <%= f.label :favoriteColor %><br>
     <%= f.text_field :favoriteColor %>
   </div>
+  
+  <%= f.fields_for :zip_code do |builder| %>
+    <%= render "zip_fields", :f => builder %>
+  <%end%>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
