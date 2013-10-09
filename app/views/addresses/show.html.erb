@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @address.firstName %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @address.lastName %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @address.email %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @address.zipCode %>
+</p>
+
+<p>
+  <strong>Favoritecolor:</strong>
+  <%= @address.favoriteColor %>
+</p>
+
+<%= link_to 'Edit', edit_address_path(@address) %> |
+<%= link_to 'Back', addresses_path %>
