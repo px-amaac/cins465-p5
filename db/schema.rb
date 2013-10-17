@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013192559) do
+ActiveRecord::Schema.define(version: 20131017071050) do
 
   create_table "addresses", force: true do |t|
     t.string   "firstName"
     t.string   "lastName"
     t.string   "email"
-    t.string   "favoriteColor"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 20131013192559) do
   end
 
   create_table "zip_codes", force: true do |t|
-    t.integer  "zip"
+    t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
