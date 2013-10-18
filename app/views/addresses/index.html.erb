@@ -1,11 +1,13 @@
 <h1>Listing addresses</h1>
-
-<table>
+<div class = "table-responsive">
+  <table class = "table table-bordered">
   <thead>
     <tr>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Email</th>
+      <th>Zip Code</th>
+      <th>Favorite Color</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,14 +20,16 @@
         <td><%= address.firstName %></td>
         <td><%= address.lastName %></td>
         <td><%= address.email %></td>
-        <td><%= link_to 'Show', address %></td>
-        <td><%= link_to 'Edit', edit_address_path(address) %></td>
-        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= address.zip_code.zip %></td>
+        <td bgcolor = <%= address.color.hex %>><%= address.color.name %></td>
+        <td><%= link_to 'Show', address, :class => "btn btn-success" %></td>
+        <td><%= link_to 'Edit', edit_address_path(address), :class => "btn btn-info" %></td>
+        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
-<%= link_to 'New Address', new_address_path %>
+<%= link_to 'New Address', new_address_path, :class => "btn btn-primary" %>

@@ -28,7 +28,7 @@
     <%= f.text_field :code %>
   </div>
   <div class="field">
-  <%= collection_select(:f_color, :color_id, Color.all.collect, :id, :name, prompt:true, :selected => params[:f_color] ) %>
+  <%= collection_select(:address, :f_color, Color.all, :id, :name, prompt:true, :selected => params[:f_color] ) %>
     </div>
   <div class="actions">
     <%= f.submit %>

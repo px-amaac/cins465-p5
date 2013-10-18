@@ -23,4 +23,5 @@ en:
   activerecord:
     attributes:
       address:
-        code: "Zip Code" 
+        code: "Zip Code"
+        f_code: "Color"

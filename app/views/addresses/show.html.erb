@@ -19,6 +19,11 @@
   <strong>Zip Code:</strong>
   <%= @address.zip_code.zip %>
 </p>
+<p>
+  <strong>Color:</strong>
+  <%= @address.color.name %>
+</p>
+
 
 <%= link_to 'Edit', edit_address_path(@address) %> |
 <%= link_to 'Back', addresses_path %>

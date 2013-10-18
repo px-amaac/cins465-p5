@@ -1,17 +1,21 @@
 class CodeValidator < ActiveModel::EachValidator
 	def validate_each(record, attribute, value)
+		
 		@zip = ZipCode.find_by_zip(value)
 		if @zip.nil?
 			record.errors[attribute] << (options[:message] || "is not a valid Zip Code")
 		else
-			record.build_zip_code_relationship(:zip_code_id => @zip.id)
+			record.build_zip_code_relationship(:zip_code_id => @zip.id).save
 		end
 	end
 end
 
 class FColorValidator < ActiveModel::EachValidator
 	def validate_each(record, attribute, value)
-		record.build_color_relationship(value)
+		if record.color
+			ColorRelationship.find_by_address_id(record.id).delete
+		end
+		record.build_color_relationship(:color_id => value).save
 	end
 end
 
@@ -30,8 +34,8 @@ class Address < ActiveRecord::Base
   	validates :firstName, :lastName, presence: true
 	validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
 	validates :code, presence: true, code: true
-	validates :f_color, f_color: true
-#	after_save :assign_zip
+	validates :f_color, presence: true, f_color: true
+
 	def f_color
 		if self.color
 			self.color.id
@@ -47,15 +51,7 @@ class Address < ActiveRecord::Base
 		end
 	end
 
-	private
 
-	def assign_zip
-		@zip = ZipCode.find_by_zip(:code)
-		if @zip
-			puts @zip.zip
-			zip_code_relationship.create!(:zip_code_id => @zip.id)
-		end
-	end
 end
 
 
