@@ -12,10 +12,12 @@ end
 
 class FColorValidator < ActiveModel::EachValidator
 	def validate_each(record, attribute, value)
-		if record.color
-			ColorRelationship.find_by_address_id(record.id).delete
+		@color = Color.find_by_id(value)
+		if @color.nil?
+			record.errors[attribute] << (options[:message] || "needs to be selected")
+		else
+			record.build_color_relationship(:color_id => @color.id).save
 		end
-		record.build_color_relationship(:color_id => value).save
 	end
 end
 
@@ -34,21 +36,15 @@ class Address < ActiveRecord::Base
   	validates :firstName, :lastName, presence: true
 	validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
 	validates :code, presence: true, code: true
-	validates :f_color, presence: true, f_color: true
 
+	validates :f_color, presence: true, f_color: true
+ 
 	def f_color
-		if self.color
-			self.color.id
-		else
 			@f_color
-		end
 	end
+
 	def code
-		if self.zip_code
-			self.zip_code.zip
-		else
 			@code
-		end
 	end
 
 

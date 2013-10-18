@@ -9,7 +9,7 @@ ZipCode.delete_all
 zipFilename = Rails.root.join('app', 'assets', 'zips.txt')
 zipcodes = open(zipFilename.to_s) do |zipcodes| 
 	zipcodes.read.each_line do |zipcode|
-		zip = zipcode
+		zip = zipcode.gsub("\n").to_i
 		ZipCode.create!(:zip => zip)
 		puts zip
 	end

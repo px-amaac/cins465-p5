@@ -23,13 +23,23 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-   <div class="field">
-    <%= f.label :zip_code %>
-    <%= f.text_field :code %>
+  <div class="field">
+  <% if @address.zip_code %>
+  <%= f.label :code, 'Zip Code' %>
+  <%= f.text_field :code, :value => @address.zip_code.zip %>
+  <% else %>
+  <%= f.text_field :code %>
+  <% end %>
+
   </div>
   <div class="field">
-  <%= collection_select(:address, :f_color, Color.all, :id, :name, prompt:true, :selected => params[:f_color] ) %>
-    </div>
+  <% if @address.color %>
+  <%= collection_select(:address, :f_color, Color.all, :id, :name, prompt:true, :selected => @address.color.id ) %>
+  <% else %>
+  <%= collection_select(:address, :f_color, Color.all, :id, :name, prompt:true ) %>
+  <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
